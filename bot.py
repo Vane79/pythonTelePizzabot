@@ -41,10 +41,10 @@ def talking(message):
     if talker.state == 'asking_size' and message.text.lower() in ('маленькую', 'среднюю', 'большую'):
         talker.size = message.text.lower()
         bot.send_message(message.chat.id, talker.ask_for_pay(), reply_markup=payment_markup)
-        talker.ask_payment()
+        talker.next_state()
     elif talker.state == 'asking_payment' and message.text.lower() in ('наличными', 'картой'):
         talker.payment = message.text.lower()
-        talker.received_payment_info()
+        talker.next_state()
         bot.send_message(message.chat.id, talker.confirmation(), reply_markup=y_n_markup)
     elif talker.state == 'acknowledging' and message.text.lower() == 'да':
         bot.send_message(message.chat.id, talker.thank_you(), reply_markup=ReplyKeyboardRemove())

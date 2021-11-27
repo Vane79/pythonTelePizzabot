@@ -1,4 +1,4 @@
-from transitions import Machine
+import transitions
 
 
 class PizzaBot(object):
@@ -20,7 +20,8 @@ class PizzaBot(object):
         ]
 
     def __init__(self):
-        self.machine = Machine(model=self, states=self.states, transitions=self.transitions, initial='sleep')
+        self.machine = transitions.Machine(model=self, states=self.states, transitions=self.transitions, initial='sleep')
+        self.machine.add_ordered_transitions()
         self.size = None
         self.payment = None
 
